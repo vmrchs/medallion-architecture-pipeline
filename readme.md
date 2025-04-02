@@ -30,8 +30,9 @@ This project implements a data pipeline following the Medallion Architecture (al
 ## 🛠️ Installation
 
 1. Clone this repository
+
    ```bash
-   git clone https://github.com/yourusername/brewery-data-pipeline.git
+   git clone https://github.com/vmrchs/medallion-architecture-pipeline.git
    cd brewery-data-pipeline
    ```
 
