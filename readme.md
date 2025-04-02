@@ -82,18 +82,6 @@ docker-compose run brewery_pipeline python test_brewery_pipeline.py
 2. **Transform - Silver**: Raw data is cleaned, validated, and partitioned by state
 3. **Transform - Gold**: Silver data is aggregated to create business metrics by brewery type and state
 
-## 📈 Future Enhancements
-
-- **Scheduling**: Integrate with Apache Airflow for advanced orchestration
-- **Real-time Processing**: Add streaming capabilities with Kafka or Kinesis
-- **Cloud Deployment**: Deployment templates for AWS, Azure, or GCP
-- **Data Quality**: Implement Great Expectations for data validation
-- **Dashboard**: Create a dashboard using Streamlit or Dash
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
