@@ -54,7 +54,7 @@ The pipeline stores data in Parquet format. To visualize it:
 ## 📁 Project Structure
 
 ```
-brewery-data-pipeline/
+medallion-architecture-pipeline/
 │
 ├── brewery_pipeline.py     # Main pipeline implementation
 ├── test_brewery_pipeline.py # Unit tests
