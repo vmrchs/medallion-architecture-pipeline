@@ -81,7 +81,3 @@ docker-compose run brewery_pipeline python test_brewery_pipeline.py
 1. **Extract**: Data is pulled from the Open Brewery DB API and stored as raw JSON in the Bronze layer
 2. **Transform - Silver**: Raw data is cleaned, validated, and partitioned by state
 3. **Transform - Gold**: Silver data is aggregated to create business metrics by brewery type and state
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
