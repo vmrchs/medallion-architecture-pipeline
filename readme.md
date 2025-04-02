@@ -1,65 +1,98 @@
-# Pipeline de Dados de Cervejarias
+# Brewery Data Pipeline
 
-Este projeto implementa um pipeline de dados que consome a API Open Brewery DB e armazena os dados em uma arquitetura de medalhão de três camadas.
+A modern data pipeline that extracts, transforms, and loads brewery data following the medallion architecture pattern (Bronze, Silver, Gold layers).
 
-## Arquitetura
+![Medallion Architecture](https://img.shields.io/badge/Architecture-Medallion-blue)
+![Python](https://img.shields.io/badge/Python-3.9-green)
+![Docker](https://img.shields.io/badge/Docker-Ready-blue)
 
-- **Bronze**: Dados brutos da API em formato JSON
-- **Silver**: Dados transformados e particionados por estado em formato Parquet
-- **Gold**: Dados agregados por tipo e localização
+## 🏗️ Architecture
 
-## Requisitos
+This project implements a data pipeline following the Medallion Architecture (also known as Delta/Lakehouse Architecture):
 
-- Docker
-- Docker Compose
+- **Bronze Layer**: Raw data stored as JSON, exactly as received from the API
+- **Silver Layer**: Cleaned and transformed data, partitioned by state, stored as Parquet files
+- **Gold Layer**: Business-level aggregations and metrics for analysis, stored as Parquet files
 
-## Como executar
+## 🚀 Features
 
-1. Clone o repositório
-2. Execute o pipeline:
+- **API Integration**: Fetches brewery data from the Open Brewery DB API
+- **Data Partitioning**: Organizes data by state for efficient access
+- **Automated Aggregations**: Creates business-ready datasets with brewery counts by type and state
+- **Containerized**: Fully dockerized for environment consistency
+- **Unit Tested**: Includes comprehensive tests for all pipeline stages
+
+## 📋 Prerequisites
+
+- [Docker](https://www.docker.com/get-started)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+## 🛠️ Installation
+
+1. Clone this repository
+   ```bash
+   git clone https://github.com/yourusername/brewery-data-pipeline.git
+   cd brewery-data-pipeline
+   ```
+
+2. Build and run the pipeline
+   ```bash
+   docker-compose up --build
+   ```
+
+## 📊 Data Visualization with DBeaver
+
+The pipeline stores data in Parquet format. To visualize it:
+
+1. Install [DBeaver](https://dbeaver.io/download/)
+2. Connect to your data:
+   - Use "File" connection type for Parquet files
+   - Browse to the `./data` directory to access the processed data
+   - Explore Silver layer data (by state) or Gold layer aggregations
+
+## 📁 Project Structure
+
+```
+brewery-data-pipeline/
+│
+├── brewery_pipeline.py     # Main pipeline implementation
+├── test_brewery_pipeline.py # Unit tests
+├── Dockerfile              # Container configuration
+├── docker-compose.yaml     # Service orchestration
+├── requirements.txt        # Python dependencies
+├── README.md               # Project documentation
+└── data/                   # Data storage (mounted volume)
+    ├── bronze/             # Raw JSON data from API
+    ├── silver/             # Cleaned data partitioned by state
+    └── gold/               # Aggregated business metrics
+```
+
+## 🧪 Testing
+
+Run the tests with:
 
 ```bash
-docker-compose up
+docker-compose run brewery_pipeline python test_brewery_pipeline.py
 ```
 
-Os dados processados serão armazenados na pasta `data/` com a seguinte estrutura:
-- `data/bronze/`: Dados brutos da API
-- `data/silver/`: Dados transformados e particionados por estado
-- `data/gold/`: Agregações por tipo e localização
+## 🔄 Data Flow
 
-## Estrutura do projeto
+1. **Extract**: Data is pulled from the Open Brewery DB API and stored as raw JSON in the Bronze layer
+2. **Transform - Silver**: Raw data is cleaned, validated, and partitioned by state
+3. **Transform - Gold**: Silver data is aggregated to create business metrics by brewery type and state
 
-```
-brewery-pipeline/
-│
-├── brewery_pipeline.py    # Script principal do pipeline
-├── Dockerfile             # Configuração do container
-├── docker-compose.yml     # Configuração do Docker Compose
-├── requirements.txt       # Dependências Python
-└── data/                  # Diretório onde os dados serão armazenados
-    ├── bronze/            # Camada bronze (dados brutos)
-    ├── silver/            # Camada silver (dados tratados por estado)
-    └── gold/              # Camada gold (dados agregados)
-```
+## 📈 Future Enhancements
 
-## Monitoramento e Alertas
+- **Scheduling**: Integrate with Apache Airflow for advanced orchestration
+- **Real-time Processing**: Add streaming capabilities with Kafka or Kinesis
+- **Cloud Deployment**: Deployment templates for AWS, Azure, or GCP
+- **Data Quality**: Implement Great Expectations for data validation
+- **Dashboard**: Create a dashboard using Streamlit or Dash
 
-Para um ambiente de produção, recomenda-se implementar:
+## 🤝 Contributing
 
-1. **Monitoramento do Pipeline**:
-   - Integração com ferramentas como Prometheus/Grafana
-   - Logs centralizados com ELK Stack ou CloudWatch
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-2. **Qualidade de Dados**:
-   - Validações de schema e integridade
-   - Monitoramento de valores nulos ou inválidos
+## 📄 License
 
-3. **Alertas**:
-   - Notificações por e-mail, Slack ou outros canais
-   - Alertas para falhas no pipeline e problemas de qualidade de dados
-
-## Extensões Futuras
-
-1. **Agendamento**: Integrar com Airflow ou outras ferramentas de orquestração
-2. **Escalabilidade**: Migrar para processamento distribuído com Spark
-3. **Cloud**: Implementar usando serviços em nuvem como AWS S3/Glue, Azure Data Lake/Databricks
+This project is licensed under the MIT License - see the LICENSE file for details.

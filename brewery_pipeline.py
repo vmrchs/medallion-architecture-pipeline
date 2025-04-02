@@ -21,7 +21,7 @@ def extract_to_bronze():
     date_str = datetime.now().strftime("%Y-%m-%d")
     bronze_file = f"{BRONZE_PATH}/breweries_{date_str}.json"
     
-    response = requests.get('https://api.openbrewerydb.org/breweries')
+    response = requests.get('https://api.openbrewerydb.org/v1/breweries/')
     if response.status_code == 200:
         with open(bronze_file, 'w') as f:
             json.dump(response.json(), f)
